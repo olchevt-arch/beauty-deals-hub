@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeautyDealsHub | Weekly Luxury Beauty Edits</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-noir: #121822;
+            --color-noir-soft: #3A414C;
+            --color-blanco: #EAE8E1;
+            --color-blanco-warm: #F4F2ED;
+            --color-white: #FFFFFF;
+            --color-gold: #D2B986;
+            --color-gold-deep: #B89960;
+            --color-taupe: #8B857C;
+            --color-taupe-light: #A9A297;
+
+            --font-serif: 'Fraunces', serif;
+            --font-sans: 'Manrope', sans-serif;
+            --font-mono: 'IBM Plex Mono', monospace;
+
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --radius-pill: 999px;
+            
+            --shadow-sm: 0 2px 8px rgba(18, 24, 34, 0.05);
+            --shadow-md: 0 8px 24px rgba(18, 24, 34, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-blanco);
+            color: var(--color-noir);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { transition: none !important; animation: none !important; }
+        }
+
+        h1, h2, h3, .logo-text { font-family: var(--font-serif); font-weight: 400; }
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; letter-spacing: -0.02em; }
+        h2 { font-size: clamp(2rem, 4vw, 2.75rem); line-height: 1.2; }
+        em { font-style: italic; color: var(--color-gold-deep); }
+        .mono-label { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-taupe); }
+        
+        *:focus-visible { outline: 2px solid var(--color-gold-deep); outline-offset: 2px; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        a { color: inherit; text-decoration: none; transition: color 0.2s; }
+
+        header { padding: 24px 0; border-bottom: 1px solid rgba(139, 133, 124, 0.2); }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; }
+        .logo-wrap { display: flex; align-items: center; gap: 12px; }
+        .logo-icon { width: 32px; height: 32px; }
+        .logo-icon path { fill: var(--color-gold-deep); }
+        .logo-text { font-size: 1.5rem; font-weight: 600; }
+        .nav-links { display: flex; gap: 32px; font-weight: 500; font-size: 0.95rem; }
+        .nav-links a:hover { color: var(--color-gold-deep); }
+        @media (max-width: 860px) { .nav-links { display: none; } }
+
+        .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
+        .hero-content { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; }
+        .hero p { font-size: 1.125rem; color: var(--color-noir-soft); max-width: 480px; }
+        .timer-wrap { display: flex; align-items: center; gap: 12px; background: var(--color-white); padding: 12px 20px; border-radius: var(--radius-pill); border: 1px solid var(--color-taupe-light); margin-top: 16px; }
+        .timer-dot { width: 10px; height: 10px; background: #4CAF50; border-radius: 50%; animation: pulse 2s infinite; }
+        .timer-text { font-family: var(--font-mono); font-size: 0.9rem; font-weight: 500; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4); } 70% { box-shadow: 0 0 0 6px rgba(76, 175, 80, 0); } 100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); } }
+        .btn { display: inline-block; padding: 16px 32px; background: var(--color-noir); color: var(--color-white); font-weight: 600; border-radius: var(--radius-pill); border: none; cursor: pointer; transition: background 0.2s, transform 0.2s; }
+        .btn:hover { background: var(--color-noir-soft); transform: translateY(-2px); }
+        .hero-art { width: 100%; max-width: 500px; aspect-ratio: 1; margin: 0 auto; display: block; object-fit: cover; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); }
+        @media (max-width: 860px) { .hero { grid-template-columns: 1fr; text-align: center; gap: 40px; padding: 60px 20px; } .hero-content { align-items: center; } .hero p { margin: 0 auto; } }
+
+        .filters { display: flex; justify-content: center; flex-wrap: wrap; gap: 16px; padding: 0 20px 40px; }
+        .filter-pill { display: flex; align-items: center; gap: 8px; padding: 8px 20px; background: var(--color-white); border-radius: var(--radius-pill); font-weight: 500; border: 1px solid transparent; transition: all 0.2s; box-shadow: var(--shadow-sm); }
+        .filter-pill:hover { border-color: var(--color-gold); transform: translateY(-1px); }
+        .swatch { width: 14px; height: 14px; border-radius: 50%; }
+
+        .deals-section { background: var(--color-blanco-warm); padding: 80px 0; }
+        .deals-header { text-align: center; margin-bottom: 60px; }
+        .deals-header p { color: var(--color-noir-soft); margin-top: 12px; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+        @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+
+        .card { background: var(--color-white); border-radius: var(--radius-lg); padding: 24px; position: relative; display: flex; flex-direction: column; box-shadow: var(--shadow-sm); transition: transform 0.3s, box-shadow 0.3s; }
+        .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+        .badge { position: absolute; top: 16px; right: 16px; background: var(--color-gold); color: var(--color-noir); font-family: var(--font-mono); font-size: 0.85rem; font-weight: 500; padding: 6px 12px; border-radius: var(--radius-pill); z-index: 2; transition: all 0.2s; }
+        
+        .carousel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; border-radius: var(--radius-md); margin-bottom: 8px; scroll-behavior: smooth; }
+        .carousel::-webkit-scrollbar { display: none; }
+        /* Заключва скролването, ако е скрит overflow */
+        .carousel.no-swipe { overflow-x: hidden; touch-action: pan-y; }
+        
+        .carousel-slide { flex: 0 0 100%; scroll-snap-align: start; aspect-ratio: 1; display: flex; justify-content: center; align-items: center; padding: 10px; }
+        .carousel-slide img, .carousel-slide svg { width: 100%; height: 100%; object-fit: contain; }
+        .swipe-hint { text-align: center; font-size: 0.65rem; color: var(--color-taupe); margin-bottom: 16px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.05em; height: 12px; }
+        
+        .card-eyebrow { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-taupe); margin-bottom: 8px; text-transform: uppercase; }
+        
+        .card-title { 
+            font-family: var(--font-serif); 
+            font-size: 1.25rem; 
+            font-weight: 600; 
+            line-height: 1.3; 
+            margin-bottom: 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .card-brand { color: var(--color-noir-soft); font-size: 0.9rem; margin-bottom: 16px; }
+        .price-row { display: flex; align-items: baseline; gap: 12px; font-family: var(--font-mono); margin-bottom: 24px; margin-top: auto; }
+        .price-new { font-size: 1.25rem; font-weight: 600; color: var(--color-noir); transition: color 0.2s; }
+        .price-old { font-size: 1rem; color: var(--color-taupe-light); text-decoration: line-through; transition: color 0.2s; }
+        
+        .card-cta { display: block; text-align: center; padding: 14px; border: 1px solid var(--color-noir); border-radius: var(--radius-pill); font-weight: 600; transition: all 0.2s; margin-bottom: 12px; }
+        .card-cta:hover { background: var(--color-noir); color: var(--color-white); }
+        .card-disclaimer { font-size: 0.7rem; color: var(--color-taupe); text-align: center; line-height: 1.4; }
+
+        .why-us { background: var(--color-white); border-radius: var(--radius-lg); padding: 60px; margin: 80px auto; max-width: 1000px; display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; align-items: center; box-shadow: var(--shadow-md); }
+        @media (max-width: 860px) { .why-us { grid-template-columns: 1fr; padding: 40px 24px; gap: 40px; } }
+        .benefit-list { display: flex; flex-direction: column; gap: 24px; list-style: none; }
+        .benefit-item { display: flex; gap: 16px; align-items: flex-start; }
+        .benefit-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--color-gold); flex-shrink: 0; margin-top: 6px; }
+        .benefit-item h4 { font-size: 1.1rem; margin-bottom: 4px; }
+        .benefit-item p { color: var(--color-noir-soft); font-size: 0.95rem; }
+
+        .newsletter { background: var(--color-gold); padding: 80px 20px; text-align: center; }
+        .newsletter h2 { margin-bottom: 16px; }
+        .newsletter p { color: var(--color-noir-soft); margin-bottom: 32px; font-size: 1.1rem; }
+        .newsletter-form { display: flex; max-width: 480px; margin: 0 auto; gap: 8px; }
+        @media (max-width: 560px) { .newsletter-form { flex-direction: column; } }
+        .newsletter-form input { flex: 1; padding: 16px 24px; border: none; border-radius: var(--radius-pill); font-family: var(--font-sans); font-size: 1rem; }
+        .newsletter-form button { background: var(--color-noir); color: var(--color-white); border: none; padding: 16px 32px; border-radius: var(--radius-pill); font-weight: 600; cursor: pointer; transition: background 0.2s; }
+        .newsletter-form button:hover { background: var(--color-noir-soft); }
+
+        footer { background: var(--color-blanco); padding: 80px 20px 40px; border-top: 1px solid rgba(139, 133, 124, 0.2); }
+        .footer-content { max-width: 800px; margin: 0 auto; text-align: center; display: flex; flex-direction: column; gap: 24px; align-items: center; }
+        .footer-logo { display: flex; align-items: center; gap: 12px; filter: grayscale(1); opacity: 0.7; }
+        .footer-legal { font-size: 0.8rem; color: var(--color-taupe); line-height: 1.6; }
+        .owner-note { margin-top: 40px; padding: 20px; border: 2px dashed var(--color-taupe-light); border-radius: var(--radius-md); background: var(--color-blanco-warm); text-align: left; font-size: 0.85rem; color: var(--color-noir-soft); }
+        .owner-note strong { color: var(--color-noir); }
+
+        /* --- Info Icon & Tooltip --- */
+        .info-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--color-taupe-light);
+            color: var(--color-white);
+            font-family: var(--font-serif);
+            font-size: 13px;
+            font-style: italic;
+            cursor: help;
+            margin-left: 0;
+            vertical-align: middle;
+            position: relative;
+        }
+
+        .info-icon::after {
+            content: attr(data-desc);
+            position: absolute;
+            bottom: 150%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 220px;
+            background: var(--color-noir);
+            color: var(--color-white);
+            padding: 10px 14px;
+            border-radius: var(--radius-md);
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.4;
+            text-align: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+            z-index: 10;
+            pointer-events: none;
+            box-shadow: var(--shadow-md);
+        }
+
+        .info-icon::before {
+            content: '';
+            position: absolute;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 6px;
+            border-style: solid;
+            border-color: var(--color-noir) transparent transparent transparent;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+
+        .info-icon:hover::after,
+        .info-icon:hover::before {
+            opacity: 1;
+            visibility: visible;
+            bottom: 120%; 
+        }
+        .info-icon:hover::before { bottom: calc(120% - 12px); }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <div class="container header-inner">
+            <a href="#" class="logo-wrap">
+                <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 5 L60 40 L95 50 L60 60 L50 95 L40 60 L5 50 L40 40 Z"/>
+                </svg>
+                <div class="logo-text">BeautyDealsHub</div>
+            </a>
+            <nav class="nav-links">
+                <a href="#deals">This Week's Edit</a>
+                <a href="#why-us">Why Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="mono-label">Refreshed every Monday</span>
+            <h1>Luxury beauty, <br><em>genuinely</em> discounted.</h1>
+            <p>We scour the beauty counters and back-pages to curate the best high-end skincare, makeup, and fragrance deals hiding in plain sight.</p>
+            <div class="timer-wrap">
+                <div class="timer-dot"></div>
+                <div class="timer-text" id="countdown-timer">Next refresh calculating...</div>
+            </div>
+            <a href="#deals" class="btn">View Current Deals</a>
+        </div>
+        <div class="hero-art-wrap">
+            <img class="hero-art" src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=800&auto=format&fit=crop" alt="Luxury minimalist beauty products">
+        </div>
+    </section>
+
+    <div class="filters">
+        <div class="filter-pill"><div class="swatch" style="background: var(--color-noir)"></div> Skincare</div>
+        <div class="filter-pill"><div class="swatch" style="background: var(--color-gold)"></div> Makeup</div>
+        <div class="filter-pill"><div class="swatch" style="background: var(--color-taupe-light)"></div> Fragrance</div>
+        <div class="filter-pill"><div class="swatch" style="background: var(--color-taupe)"></div> Hair</div>
+        <div class="filter-pill"><div class="swatch" style="background: var(--color-noir-soft)"></div> Tools</div>
+    </div>
+
+    <section id="deals" class="deals-section">
+        <div class="container">
+            <div class="deals-header">
+                <h2>This week's edit</h2>
+                <p>Prices and availability are verified at the time of publication.</p>
+            </div>
+            <div class="grid" id="deals-grid">
+                <!-- Картите се генерират тук чрез JS -->
+            </div>
+        </div>
+    </section>
+
+    <section id="why-us" class="container">
+        <div class="why-us">
+            <div><h2>Not another automated feed.</h2></div>
+            <ul class="benefit-list">
+                <li class="benefit-item"><div class="benefit-dot"></div><div><h4>Hand-checked discounts</h4><p>We don't use bots. Every product is evaluated for price history.</p></div></li>
+                <li class="benefit-item"><div class="benefit-dot" style="background: var(--color-noir-soft)"></div><div><h4>Refreshed weekly</h4><p>The edit updates every Monday.</p></div></li>
+                <li class="benefit-item"><div class="benefit-dot" style="background: var(--color-taupe)"></div><div><h4>Buy directly on Amazon</h4><p>You checkout on Amazon. Shipping and returns stay exactly the same.</p></div></li>
+                <li class="benefit-item"><div class="benefit-dot" style="background: var(--color-taupe-light)"></div><div><h4>Fully transparent</h4><p>We earn a small commission if you use our links, at zero extra cost to you.</p></div></li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <div class="container">
+            <h2>Never miss a drop</h2>
+            <p>Get the weekly edit delivered to your inbox every Monday morning.</p>
+            <form class="newsletter-form" onsubmit="event.preventDefault();">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer id="footer">
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <svg class="logo-icon" style="width: 24px; height: 24px;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 5 L60 40 L95 50 L60 60 L50 95 L40 60 L5 50 L40 40 Z"/>
+                </svg>
+                <div class="logo-text" style="font-size: 1.2rem;">BeautyDealsHub</div>
+            </div>
+            <div class="footer-legal">
+                <p>Curated luxury beauty deals, updated weekly.</p><br>
+                <p><strong>Affiliate Disclosure:</strong> BeautyDealsHub is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate, we earn from qualifying purchases.</p><br>
+                <p>Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- ДАННИ ЗА ПРОДУКТИТЕ ---
+        // ЗАБЕЛЕЖКА: Вече ползваме "variants", където всяка снимка си има цена!
+        // INJECT_PRODUCTS_START
+        const products = [
+            // ПРОДУКТ 1: Има само 1 снимка и 1 цена (Скролът ще е изключен автоматично)
+            {
+                category: "Skincare",
+                name: "Advanced Night Repair Serum",
+                description: "Богат на хиалуронова киселина. Нанасяйте вечер за дълбока хидратация.",
+                brand: "Estée Lauder",
+                affiliateUrl: "#",
+                variants: [
+                    {
+                        image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=600&auto=format&fit=crop",
+                        discount: 25,
+                        oldPrice: "125.00",
+                        newPrice: "93.75"
+                    }
+                ]
+            },
+            // ПРОДУКТ 2
+            {
+                category: "Fragrance",
+                name: "Baccarat Rouge 540 Extrait",
+                description: "Емблематичен луксозен аромат с нотки на жасмин, шафран и кедрово дърво.",
+                brand: "Maison Francis Kurkdjian",
+                affiliateUrl: "#",
+                variants: [
+                    {
+                        image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?q=80&w=600&auto=format&fit=crop",
+                        discount: 15,
+                        oldPrice: "435.00",
+                        newPrice: "369.75"
+                    },
+                    {
+                        image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?q=80&w=600&auto=format&fit=crop",
+                        discount: 5,
+                        oldPrice: "5.00",
+                        newPrice: "9.75"    
+                    }
+                ]
+            },
+            // ПРОДУКТ 3: 🌟 Има 3 варианта с НАПЪЛНО РАЗЛИЧНИ ЦЕНИ!
+            {
+                category: "Accessories",
+                name: "Love You Forever Heart Pendant",
+                description: "Позлатено колие. Различните цветове са с различна отстъпка!",
+                brand: "Jewelry Collection",
+                affiliateUrl: "https://a.co/d/01XjvThL",
+                variants: [
+                    {   // Вариант 1 (Червено)
+                        image: "https://images.unsplash.com/photo-1599643478514-4a8107311158?q=80&w=600&auto=format&fit=crop",
+                        discount: 40,
+                        oldPrice: "99.00",
+                        newPrice: "59.40"
+                    },
+                    {   // Вариант 2 (Синьо - по-малка отстъпка)
+                        image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=600&auto=format&fit=crop",
+                        discount: 20,
+                        oldPrice: "89.00",
+                        newPrice: "71.20"
+                    },
+                    {   // Вариант 3 (Зелено - по-голяма отстъпка)
+                        image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=600&auto=format&fit=crop",
+                        discount: 50,
+                        oldPrice: "99.00",
+                        newPrice: "49.50"
+                    }
+                ]
+            },
+            // ПРОДУКТ 4
+            {
+                category: "Hair",
+                name: "Gold Lust Nourishing Hair Oil",
+                description: "Леко олио за коса, което възстановява блясъка, хидратира и предпазва от топлина.",
+                brand: "Oribe",
+                affiliateUrl: "#",
+                variants: [
+                    {
+                        image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?q=80&w=600&auto=format&fit=crop",
+                        discount: 15,
+                        oldPrice: "57.00",
+                        newPrice: "48.45"
+                    }
+                ]
+            },
+            // ПРОДУКТ 5
+            {
+                category: "Tools",
+                name: "Rose Quartz Facial Roller",
+                description: "Извайва контура на лицето, стимулира кръвообращението и намалява подпухналостта.",
+                brand: "Mount Lai",
+                affiliateUrl: "#",
+                variants: [
+                    {
+                        image: "https://images.unsplash.com/photo-1615397323204-e35c249bc9e5?q=80&w=600&auto=format&fit=crop",
+                        discount: 20,
+                        oldPrice: "38.00",
+                        newPrice: "30.40"
+                    }
+                ]
+            },
+            // ПРОДУКТ 6
+            {
+                category: "Makeup",
+                name: "Rouge Dior Refillable Lipstick",
+                description: "Класическо червено с дълготрайна формула, обогатена с екстракт от божур за меки устни.",
+                brand: "Dior",
+                affiliateUrl: "#",
+                variants: [
+                    {
+                        image: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=600&auto=format&fit=crop",
+                        discount: 20,
+                        oldPrice: "49.00",
+                        newPrice: "39.20"
+                    }
+                ]
+            },
+            // ПРОДУКТ 7
+            {
+                category: "Skincare",
+                name: "The Crème - Anti-Aging Face Cream",
+                description: "Ултра богата текстура, която хидратира в дълбочина, стимулира клетките и изглажда фините линии.",
+                brand: "Augustinus Bader",
+                affiliateUrl: "#",
+                variants: [
+                    {
+                        image: "https://images.unsplash.com/photo-1608248593842-8021c640e704?q=80&w=600&auto=format&fit=crop",
+                        discount: 15,
+                        oldPrice: "290.00",
+                        newPrice: "246.50"
+                    }
+                ]
+            },
+            // ПРОДУКТ 8
+            {
+                category: "Fragrance",
+                name: "Gypsy Water Eau de Parfum",
+                description: "Свеж, но дълбок дървесен аромат с нотки на бергамот, лимон, пипер и сандалово дърво.",
+                brand: "Byredo",
+                affiliateUrl: "#",
+                variants: [
+                    {
+                        image: "https://images.unsplash.com/photo-1595425970377-c9703bc48b2d?q=80&w=600&auto=format&fit=crop",
+                        discount: 20,
+                        oldPrice: "225.00",
+                        newPrice: "180.00"
+                    }
+                ]
+            },
+            // ПРОДУКТ 9
+            {
+                category: "Hair",
+                name: "Chronologiste Masque Intense",
+                description: "Ревитализираща маска за коса с хиалуронова киселина за максимална мекота и огледален блясък.",
+                brand: "Kérastase",
+                affiliateUrl: "#",
+                variants: [
+                    {
+                        image: "https://images.unsplash.com/photo-1629198688000-71f23e745b6e?q=80&w=600&auto=format&fit=crop",
+                        discount: 30,
+                        oldPrice: "72.00",
+                        newPrice: "50.40"
+                    }
+                ]
+            }
+        ];
+        // INJECT_PRODUCTS_END
+
+        // --- ФУНКЦИЯ ЗА СМЯНА НА ЦЕНИ ПРИ ПЛЪЗГАНЕ ---
+        function handleSwipe(carousel) {
+            // Намираме на коя снимка сме в момента
+            const index = Math.round(carousel.scrollLeft / carousel.offsetWidth);
+            const activeSlide = carousel.children[index];
+            
+            if (!activeSlide) return;
+
+            // Намираме съответните цени за тази карта
+            const card = carousel.closest('.card');
+            const badge = card.querySelector('.badge');
+            const priceNew = card.querySelector('.price-new');
+            const priceOld = card.querySelector('.price-old');
+
+            // Взимаме данните от снимката и обновяваме цените мигновено
+            if(badge && activeSlide.dataset.discount) badge.textContent = `-${activeSlide.dataset.discount}%`;
+            if(priceNew && activeSlide.dataset.newprice) priceNew.textContent = `$${activeSlide.dataset.newprice}`;
+            if(priceOld && activeSlide.dataset.oldprice) priceOld.textContent = `$${activeSlide.dataset.oldprice}`;
+        }
+
+        // --- РЕНДЕРИРАНЕ НА ПРОДУКТИТЕ ---
+        function renderProducts() {
+            const grid = document.getElementById('deals-grid');
+            if (!grid) return;
+
+            const html = products.map((p, pIndex) => {
+                const variants = p.variants || [];
+                const hasMultiple = variants.length > 1; // Проверява дали има повече от 1 снимка
+                
+                let slidesHtml = '';
+                if (variants.length > 0) {
+                    slidesHtml = variants.map(v => `
+                        <!-- Запазваме цените директно в снимката (data атрибути) -->
+                        <div class="carousel-slide" data-discount="${v.discount}" data-oldprice="${v.oldPrice}" data-newprice="${v.newPrice}">
+                            <img src="${v.image}" alt="${p.name}" loading="lazy">
+                        </div>
+                    `).join('');
+                }
+
+                // Ако снимката е само една: скриваме текста за плъзгане. Ако са повече - показваме го.
+                const swipeHint = hasMultiple 
+                    ? `<div class="swipe-hint">&harr; Плъзнете за още варианти</div>` 
+                    : `<div class="swipe-hint"></div>`; // Празен див запазва височината, за да не подскачат картите
+
+                // Взимаме цената на първия вариант, за да я покажем по подразбиране
+                const initial = variants[0] || {};
+
+                return `
+                    <article class="card">
+                        <div class="badge">-${initial.discount || 0}%</div>
+                        
+                        <!-- onscroll вика функцията за смяна на цени. Класът no-swipe заключва скрола, ако има само 1 снимка -->
+                        <div class="carousel ${hasMultiple ? '' : 'no-swipe'}" onscroll="handleSwipe(this)">
+                            ${slidesHtml}
+                        </div>
+                        ${swipeHint}
+
+                        <span class="card-eyebrow">${p.category}</span>
+                        <h3 class="card-title">
+                            ${p.name}
+                            ${p.description ? `<span class="info-icon" data-desc="${p.description}">i</span>` : ''}
+                        </h3>
+                        <p class="card-brand">${p.brand}</p>
+                        <div class="price-row">
+                            <span class="price-new">$${initial.newPrice || '0.00'}</span>
+                            <span class="price-old">$${initial.oldPrice || '0.00'}</span>
+                        </div>
+                        <a href="${p.affiliateUrl}" target="_blank" rel="noopener sponsored nofollow" class="card-cta">Shop the deal &rarr;</a>
+                        <p class="card-disclaimer">Price at time of posting — check the final price on Amazon.</p>
+                    </article>
+                `;
+            }).join('');
+
+            grid.innerHTML = html || '<p style="grid-column: 1/-1; text-align:center; color: var(--color-taupe);">No deals available this week.</p>';
+        }
+
+        function getNextMonday() {
+            const d = new Date();
+            const daysUntil = (1 + 7 - d.getDay()) % 7 || 7;
+            d.setDate(d.getDate() + daysUntil);
+            d.setHours(0, 0, 0, 0);
+            return d;
+        }
+
+        function updateTimer(targetDate) {
+            const now = new Date();
+            const diff = targetDate - now;
+
+            if (diff <= 0) {
+                const nextTarget = getNextMonday();
+                updateTimer(nextTarget);
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const mins = Math.floor((diff / 1000 / 60) % 60);
+
+            const el = document.getElementById('countdown-timer');
+            if (el) el.textContent = `Next refresh in ${days}d ${hours}h ${mins}m`;
+        }
+
+        function initCountdown() {
+            const target = getNextMonday();
+            updateTimer(target);
+            setInterval(() => updateTimer(getNextMonday()), 60000); 
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            initCountdown();
+        });
+    </script>
+</body>
+</html>
